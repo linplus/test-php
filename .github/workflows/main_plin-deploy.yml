@@ -12,8 +12,8 @@ on:
 env:
   WEBAPP: plin-deploy
   GROUP: plin-test-rg
-  ACCOUNT: myssstorage2
-  CONTAINER: mysccontainer01
+  ACCOUNT: myssstorage02
+  CONTAINER: mysccontainer02
   EXPIRY_TIME: 30 minutes
 
 jobs:
@@ -48,7 +48,9 @@ jobs:
           azcliversion: 2.19.1
           inlineScript: |
             az extension add --name webapp
-            az storage blob upload -f php-app.zip --account-name myssstorage2 -c mysccontainer01 -n php-app.zip
+            az storage account create   -n $ACCOUNT   -g $GROUP -l eastus
+            az storage container create -n $CONTAINER --account-name $ACCOUNT
+            az storage blob upload -f php-app.zip --account-name $ACCOUNT -c $CONTAINER -n php-app.zip
 # ZIP_URL=$(az storage blob generate-sas --full-uri --permissions r --expiry ${{ env.expiry }} --account-name $ACCOUNT -c $CONTAINER -n $ACCOUNT | xargs)
 # az webapp deploy --name $WEBAPP --resource-group $GROUP --type zip --src-url  $ZIP_URL --async false
 
