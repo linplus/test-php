@@ -44,8 +44,7 @@ jobs:
 
       - run: |
           az extension add --name webapp
-#         az storage account create -n $ACCOUNT -g $GROUP -l eastus
-#         az storage blob upload -f php-app.zip --account-name $ACCOUNT -c $CONTAINER -n php-app.zip
+          az storage blob upload -f php-app.zip --account-name $ACCOUNT -c $CONTAINER -n php-app.zip
           ZIP_URL=$(az storage blob generate-sas --full-uri --permissions r --expiry ${{ env.expiry }} --account-name $ACCOUNT -c $CONTAINER -n $ACCOUNT | xargs)
           echo "ZIP_URL = "$ZIP_URL
           az webapp deploy --name $WEBAPP --resource-group $GROUP --type zip --src-url  $ZIP_URL --async false
