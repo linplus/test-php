@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  WEBAPP: plinweb
+  WEBAPP: plin-deploy
   GROUP: plin-test-rg
   ACCOUNT: myssstorage02
   CONTAINER: publicc
