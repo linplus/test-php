@@ -15,7 +15,7 @@ env:
   ACCOUNT: myssstorage02
   CONTAINER: publicc
   EXPIRY_TIME: 30 minutes
-
+  ZIP_URL: https://myssstorage02.blob.core.windows.net/publicc/php-app.zip
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,8 +44,6 @@ jobs:
 
       - run: |
           az extension add --name webapp
-          az storage blob upload -f php-app.zip --account-name $ACCOUNT -c $CONTAINER -n php-app.zip
-          ZIP_URL=$(az storage blob generate-sas --full-uri --permissions r --expiry ${{ env.expiry }} --account-name $ACCOUNT -c $CONTAINER -n $ACCOUNT | xargs)
           echo "ZIP_URL = "$ZIP_URL
           az webapp deploy --name $WEBAPP --resource-group $GROUP --type zip --src-url  $ZIP_URL --async false
 
