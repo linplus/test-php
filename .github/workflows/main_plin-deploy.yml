@@ -24,7 +24,7 @@ jobs:
 #        run: npm install
 #      - name: Build project assets
 #        run: npm run build
-
+      -
       - name: Archive site content
         uses: thedoctor0/zip-release@master
         with:
@@ -35,6 +35,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: site-build
+          path: .
+          retention-days: 1
 
   distribute-project:
     name: Distribute pims v2 project to GitHub Releases
@@ -45,6 +47,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: site-build
+
+      - name: Archive site content
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: pimsv2.zip
+          exclusions: '*.git* /*node_modules/* .editorconfig'
           
       - name: Create GitHub release
         id: create-new-release
