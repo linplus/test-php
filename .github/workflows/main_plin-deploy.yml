@@ -13,36 +13,25 @@ env:
   WEBAPP: plin-deploy
 
 jobs:
-  build-project:
-    name: Build pims v2 project
+  build-and-distribute-project:
+    name: Build and distribute pims v2 project to GitHub Releases
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v2
 
-#      - name: Install NPM dependencies
-#        run: npm install
-#      - name: Build project assets
-#        run: npm run build
-#      - name: Upload site content
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: site-build
-#          path: .next/
-
-  distribute-project:
-    name: Distribute pims v2 project to GitHub Releases
-    runs-on: ubuntu-latest
-    needs: build-project
-    steps:
 #      - name: Download site content
 #        uses: actions/download-artifact@v2
 #        with:
 #          name: site-build
+
       - name: Archive site content
         uses: thedoctor0/zip-release@master
         with:
           filename: pimsv2.zip
+          exclusions: '*.git* /*node_modules/* .editorconfig'
+
       - name: Create GitHub release
         id: create-new-release
         uses: actions/create-release@v1
