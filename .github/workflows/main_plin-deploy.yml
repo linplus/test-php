@@ -28,14 +28,14 @@ jobs:
       - name: Archive site content
         uses: thedoctor0/zip-release@master
         with:
-          filename: pimsv2.zip
+          filename: release/pimsv2.zip
           exclusions: '*.git* /*node_modules/* .editorconfig'
 
       - name: Upload site content
         uses: actions/upload-artifact@v2
         with:
           name: site-build
-          path: .
+          path: release/pimsv2.zip
           retention-days: 1
 
   distribute-project:
@@ -47,12 +47,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: site-build
-
-      - name: Archive site content
-        uses: thedoctor0/zip-release@master
-        with:
-          filename: pimsv2.zip
-          exclusions: '*.git* /*node_modules/* .editorconfig'
           
       - name: Create GitHub release
         id: create-new-release
