@@ -24,7 +24,7 @@ jobs:
 #        run: npm install
 #      - name: Build project assets
 #        run: npm run build
-      -
+
       - name: Archive site content
         uses: thedoctor0/zip-release@master
         with:
