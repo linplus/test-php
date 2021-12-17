@@ -28,14 +28,15 @@ jobs:
       - name: Archive site content
         uses: thedoctor0/zip-release@master
         with:
-          filename: release/pimsv2.zip
+          path: release
+          filename: pimsv2.zip
           exclusions: '*.git* /*node_modules/* .editorconfig'
 
       - name: Upload site content
         uses: actions/upload-artifact@v2
         with:
           name: site-build
-          path: release/pimsv2.zip
+          path: ./release/pimsv2.zip
           retention-days: 1
 
   distribute-project:
