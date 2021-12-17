@@ -29,12 +29,6 @@ jobs:
           filename: 'release.zip'
           exclusions: '*.git* /*node_modules/* .editorconfig'
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: php-app
-          path: php-app.zip
-
       - name: Upload Release
         uses: ncipollo/release-action@v1
         with:
