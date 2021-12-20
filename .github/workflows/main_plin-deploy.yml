@@ -82,5 +82,7 @@ jobs:
           chmod 400 key.pem
           ssh -i key.pem  -o "StrictHostKeyChecking no" ${{secrets.SSH_HOST}} <<'ENDSSH'
           pwd
-          curl -X PUT -u '$plin-app:yA25tEcrtkiQf9eMAaoJW0i53M8od83H8MqpoSFzMC4tbnxGq3MRsdLhpbQg' https://plin-app.scm.azurewebsites.net/api/zipdeploy -H "Content-Type: application/json" -d "{'packageUri':'https://github.com/plin-qiagen/Laravel-vue/releases/download/v8/pimsv2-v8.zip'}"
+          rm release.zip
+          curl -vLJ -H 'Authorization: token ${{ github.token }}' -o release.zip 'https://github.com/plin-qiagen/test-php/releases/download/v33/pimsv2-v33.zip'
+          curl -X POST -u '$plin-app:yA25tEcrtkiQf9eMAaoJW0i53M8od83H8MqpoSFzMC4tbnxGq3MRsdLhpbQg' https://plin-app.scm.azurewebsites.net/api/zipdeploy -T release.zip
           ENDSSH
