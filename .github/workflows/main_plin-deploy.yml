@@ -70,9 +70,6 @@ jobs:
     name: Deploy containers to azure
     runs-on: ubuntu-latest
     needs: build-project
-    environment:
-      app_name: 'plin-app'
-      slot_name: 'Production'
     steps:
       - name: Download site content
         uses: actions/download-artifact@v2
