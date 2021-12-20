@@ -83,6 +83,6 @@ jobs:
           ssh -i key.pem  -o "StrictHostKeyChecking no" ${{secrets.SSH_HOST}} <<'ENDSSH'
           pwd
           rm release.zip
-          curl -vLJ -H 'Authorization: token ${{ github.token }}' -o release.zip 'https://github.com/plin-qiagen/test-php/releases/download/v33/pimsv2-v33.zip'
+          curl -vLJ -H 'Authorization: token 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' -o release.zip 'https://github.com/plin-qiagen/test-php/releases/download/v33/pimsv2-v33.zip'
           curl -X POST -u '$plin-app:yA25tEcrtkiQf9eMAaoJW0i53M8od83H8MqpoSFzMC4tbnxGq3MRsdLhpbQg' https://plin-app.scm.azurewebsites.net/api/zipdeploy -T release.zip
           ENDSSH
