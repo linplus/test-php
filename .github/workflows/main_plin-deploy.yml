@@ -80,7 +80,7 @@ jobs:
         run: |
           echo "${{ secrets.SSH_KEY }}" | tr -d '\r' > key.pem
           chmod 400 key.pem
-          ssh -i key.pem  -o "StrictHostKeyChecking no" azureuser@20.04.3 <<'ENDSSH'
+          ssh -i key.pem  -o "StrictHostKeyChecking no" azureuser@20.121.199.34 <<'ENDSSH'
           pwd
           ls
           ENDSSH
