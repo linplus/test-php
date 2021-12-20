@@ -72,9 +72,9 @@ jobs:
     needs: build-project
     steps:
       - name: Download site content
-          uses: actions/download-artifact@v2
-          with:
-            name: site-build
+        uses: actions/download-artifact@v2
+        with:
+          name: site-build
 
       - name: Moving build to artifacts directory
         run: |
