@@ -70,17 +70,20 @@ jobs:
     name: Deploy containers to azure
     runs-on: ubuntu-latest
     needs: build-project
+    environment:
+      app_name: 'plin-app'
+      slot_name: 'Production'
     steps:
       - name: Download site content
         uses: actions/download-artifact@v2
         with:
           name: site-build
 
-      - name: Moving build to artifacts directory
+      - name: deploy build through azure vm
         run: |
           echo "${{ secrets.SSH_KEY }}" | tr -d '\r' > key.pem
           chmod 400 key.pem
-          ssh -i key.pem  -o "StrictHostKeyChecking no" azureuser@20.121.199.34 <<'ENDSSH'
+          ssh -i key.pem  -o "StrictHostKeyChecking no" ${{secrets.SSH_HOST}} <<'ENDSSH'
           pwd
-          ls
+          curl -X PUT -u '$plin-app:yA25tEcrtkiQf9eMAaoJW0i53M8od83H8MqpoSFzMC4tbnxGq3MRsdLhpbQg' https://plin-app.scm.azurewebsites.net/api/zipdeploy -H "Content-Type: application/json" -d "{'packageUri':'https://github.com/plin-qiagen/Laravel-vue/releases/download/v8/pimsv2-v8.zip'}"
           ENDSSH
