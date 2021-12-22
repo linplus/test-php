@@ -1,0 +1,30 @@
+name: test github action
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  PIMS_VERSION: 2.0.0
+
+jobs:
+  build:
+    name: Example
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
+      - name: Test with environment variables
+        run: echo $PIMS_VERSION - $TAG_NAME - $RELEASE_NAME
+        env:
+          TAG_NAME: nightly-tag-${{ steps.date.outputs.date }}
+          RELEASE_NAME: nightly-release-${{ steps.date.outputs.date }}
+
+      - name: Test with input
+        uses: actions/hello-world-docker-action@master
+        with:
+          who-to-greet: ${PIMS_VERSION}-${{ steps.date.outputs.date }}
