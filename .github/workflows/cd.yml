@@ -1,8 +1,14 @@
 name: Test, Build and Deploy
 
 on:
-  pull_request:
-    types: [closed]
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+#on:
+#  pull_request:
+#    types: [closed]
 
 jobs:
   build-test-release:
