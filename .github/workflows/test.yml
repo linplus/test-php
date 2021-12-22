@@ -19,10 +19,14 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
 
       - name: Test with environment variables
-        run: echo $PIMS_VERSION - $TAG_NAME - $RELEASE_NAME
         env:
           TAG_NAME: nightly-tag-${{ steps.date.outputs.date }}
           RELEASE_NAME: nightly-release-${{ steps.date.outputs.date }}
+          GREET: $PIMS_VERSION-${{ steps.date.outputs.date }}
+        run: |
+          echo ${PIMS_VERSION} - $TAG_NAME - $RELEASE_NAME
+          echo $GREET
+
       - name: Test with input
         uses: actions/hello-world-docker-action@master
         env:
