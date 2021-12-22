@@ -28,4 +28,4 @@ jobs:
         env:
           GREET: $PIMS_VERSION-${{ steps.date.outputs.date }}
         with:
-          who-to-greet: $GREET
+          who-to-greet: ${GREET}
