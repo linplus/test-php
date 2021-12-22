@@ -64,5 +64,5 @@ jobs:
         with:
           upload_url: ${{ steps.create-new-release.outputs.upload_url }}
           asset_path: ./release.zip
-          asset_name: pims_v${{PIMS_VERSION}}_${{ steps.date.outputs.date }}.${{ github.run_number }}
+          asset_name: pims_v${PIMS_VERSION}_${{ steps.date.outputs.date }}.${{ github.run_number }}
           asset_content_type: application/zip
