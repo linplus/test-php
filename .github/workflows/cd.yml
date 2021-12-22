@@ -52,7 +52,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           release_name: v${{env.PIMS_VERSION}}_${{ steps.date.outputs.date }}.${{ github.run_number }}
-          tag_name: ${{ github.run_number }}
+          tag_name: ${{ steps.date.outputs.date }}.${{ github.run_number }}
 
       - name: Upload asset to GitHub release
         uses: actions/upload-release-asset@v1
