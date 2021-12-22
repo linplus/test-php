@@ -15,7 +15,7 @@ env:
 jobs:
 
   build-test:
-    if: github.event.action == 'closed' && github.event.pull_request.merged == true
+#    if: github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -35,7 +35,6 @@ jobs:
           retention-days: 1
 
   distribute-project:
-    name: Distribute pims v2 project to GitHub Releases
     runs-on: ubuntu-latest
     needs: build-test
     steps:
