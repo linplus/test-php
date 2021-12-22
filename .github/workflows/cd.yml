@@ -49,7 +49,7 @@ jobs:
 
       - name: add add version to release
         run: |
-          echo "version=${{env.PIMS_VERSION}}\nbuild=${{ steps.date.outputs.date }}.${{ github.run_number }}" | tr -d '\r' > pims-version.ini
+          echo $"version=${{env.PIMS_VERSION}}\nbuild=${{ steps.date.outputs.date }}.${{ github.run_number }}" | tr -d '\r' > version.ini
           zip ./release.zip pims-version.ini
 
       - name: Create GitHub release
