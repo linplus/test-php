@@ -6,6 +6,8 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  PIMS_VERSION: 2.0.0
 #on:
 #  pull_request:
 #    types: [closed]
@@ -36,8 +38,6 @@ jobs:
     name: Distribute pims v2 project to GitHub Releases
     runs-on: ubuntu-latest
     needs: build-project
-    env:
-      PIMS_VERSION: 2.0.0
     steps:
       - name: Download site content
         uses: actions/download-artifact@v2
@@ -54,8 +54,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_name: pims_v${{PIMS_VERSION}}_${{ steps.date.outputs.date }}.${{ github.run_number }}
-          tag_name: pims_v${{PIMS_VERSION}}_${{ steps.date.outputs.date }}.${{ github.run_number }}
+          release_name: pims_v${PIMS_VERSION}_${{ steps.date.outputs.date }}.${{ github.run_number }}
+          tag_name: pims_v${PIMS_VERSION}_${{ steps.date.outputs.date }}.${{ github.run_number }}
 
       - name: Upload asset to GitHub release
         uses: actions/upload-release-asset@v1
