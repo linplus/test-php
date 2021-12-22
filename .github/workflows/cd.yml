@@ -51,15 +51,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_name: pims_v${{env.PIMS_VERSION}}_${{ steps.date.outputs.date }}.${{ github.run_number }}
-          tag_name: pims_v${{env.PIMS_VERSION}}_${{ steps.date.outputs.date }}.${{ github.run_number }}
+          release_name: v${{env.PIMS_VERSION}}_${{ steps.date.outputs.date }}.${{ github.run_number }}
+          tag_name: v${{env.PIMS_VERSION}}_${{ steps.date.outputs.date }}
 
       - name: Upload asset to GitHub release
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+          upload_url: ${{ steps.create-new-release.outputs.upload_url}}
           asset_path: ./release.zip
-          asset_name: pims_v${{env.PIMS_VERSION}}_${{ steps.date.outputs.date }}.${{ github.run_number }}
+          asset_name: pimsv${{env.PIMS_VERSION}}_release.zip
           asset_content_type: application/zip
