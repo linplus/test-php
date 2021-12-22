@@ -29,7 +29,5 @@ jobs:
 
       - name: Test with input
         uses: actions/hello-world-docker-action@master
-        env:
-          GREET: $PIMS_VERSION-${{ steps.date.outputs.date }}
         with:
-          who-to-greet: ${GREET}
+          who-to-greet: $PIMS_VERSION- ${{ steps.date.outputs.date }}
