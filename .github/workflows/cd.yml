@@ -10,6 +10,7 @@ on:
 #    types: [closed]
 env:
   PIMS_VERSION: 2.0.0
+  BUILD_TYPE: CI
 
 jobs:
   build-test:
@@ -59,7 +60,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_name: v${{env.PIMS_VERSION}}_${{ steps.date.outputs.date }}.${{ github.run_number }}
+          release_name: v${{env.PIMS_VERSION}}_CI_${{ steps.date.outputs.date }}.${{ github.run_number }}
           tag_name: ${{ steps.date.outputs.date }}.${{ github.run_number }}
 
       - name: Upload asset to GitHub release
