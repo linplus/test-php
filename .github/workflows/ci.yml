@@ -1,0 +1,16 @@
+name: Test and Build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+#      - name: Test
+#        run: yarn test
