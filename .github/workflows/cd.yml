@@ -11,11 +11,12 @@ on:
 #    types: [closed]
 
 jobs:
+  env:
+    PIMS_VERSION: 2.0.0
+
   build-test-release:
     if: github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    env:
-      PIMS_VERSION: 2.0.0
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
