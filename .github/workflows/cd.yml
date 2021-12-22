@@ -50,7 +50,7 @@ jobs:
       - name: add add version to release
         run: |
           echo "version: ${{env.PIMS_VERSION}}" > version-info
-          echo "build: ${{ steps.date.outputs.date }}.${{ github.run_number }}" > version-info
+          echo "build: ${{ steps.date.outputs.date }}.${{ github.run_number }}" >> version-info
           zip ./release.zip version-info
 
       - name: Create GitHub release
