@@ -10,7 +10,7 @@ env:
   RELEASE_FILE: pimsv2
   BUILD_TYPE: PRD
 jobs:
-  build-test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
