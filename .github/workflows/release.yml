@@ -1,4 +1,4 @@
-name: Create Official Release (Master)
+name: Create Official Release (Main)
 on:
   workflow_dispatch:
     inputs:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: main
 
       - name: Archive site content
         uses: thedoctor0/zip-release@master
