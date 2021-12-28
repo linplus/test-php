@@ -61,9 +61,10 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE: ${{env.BUILD_TYPE}}_${{ steps.date.outputs.date }}.${{ github.run_number }}
         with:
-          release_name: ${{env.BUILD_TYPE}}_${{ steps.date.outputs.date }}.${{ github.run_number }}
-          tag_name: ${{ steps.date.outputs.date }}.${{ github.run_number }}
+          release_name: ${{env.RELEASE}}
+          tag_name: ${{env.RELEASE}}
 
       - name: Upload asset to GitHub release
         uses: actions/upload-release-asset@v1
