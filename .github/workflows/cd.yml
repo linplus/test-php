@@ -11,6 +11,7 @@ on:
 env:
   NAME: PIMSV2
   VERSION: 1.0.0
+  FILE: pimsv2_release
   BUILD_TYPE: CI
 
 jobs:
@@ -26,8 +27,6 @@ jobs:
         with:
           filename: release.zip
           exclusions: '*.git* /*node_modules/* .editorconfig /*storage/*'
-
-
 
       - name: Upload site content
         uses: actions/upload-artifact@v2
@@ -51,7 +50,7 @@ jobs:
 
       - name: add add version to release
         run: |
-          echo "version: ${{env.VERSION}}" > version-info
+          echo "version: ${{env.RELEASE_VERSION}}" > version-info
           echo "build: ${{ steps.date.outputs.date }}.${{ github.run_number }}" >> version-info
           zip ./release.zip version-info
 
@@ -61,7 +60,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_name: ${{env.NAME}}_CI_${{ steps.date.outputs.date }}.${{ github.run_number }}
+          release_name: ${{env.RELEASE_NAME}}_CI_${{ steps.date.outputs.date }}.${{ github.run_number }}
           tag_name: ${{ steps.date.outputs.date }}.${{ github.run_number }}
 
       - name: Upload asset to GitHub release
@@ -71,5 +70,5 @@ jobs:
         with:
           upload_url: ${{ steps.create-new-release.outputs.upload_url}}
           asset_path: ./release.zip
-          asset_name: pimsv2_release.zip
+          asset_name: ${{env.RELEASE_FILE}}.zip
           asset_content_type: application/zip
