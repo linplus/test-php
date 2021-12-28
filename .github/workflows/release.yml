@@ -1,4 +1,4 @@
-name: Create Official Release (Main)
+name: Create Official Release
 on:
   workflow_dispatch:
     inputs:
@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          ref: main
 
       - name: Archive site content
         uses: thedoctor0/zip-release@master
@@ -56,7 +54,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_name: ${{env.RELEASE_NAME}} ${{github.event.inputs.RELEASE_VERSION}}.${{ github.run_number }}
+          release_name: ${{env.BUILD_TYPE}} ${{github.event.inputs.RELEASE_VERSION}}.${{ github.run_number }}
           tag_name: ${{env.BUILD_TYPE}}_${{github.event.inputs.RELEASE_VERSION}}.${{ github.run_number }}
 
       - name: Upload asset to GitHub release
