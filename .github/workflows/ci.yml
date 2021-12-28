@@ -11,6 +11,3 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-
-#      - name: Test
-#        run: yarn test
