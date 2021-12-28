@@ -54,7 +54,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_name: ${{env.PIMSV2}} ${{github.event.inputs.RELEASE_VERSION}}
+          release_name: ${{env.RELEASE_NAME}} ${{github.event.inputs.RELEASE_VERSION}}
           tag_name: ${{env.BUILD_TYPE}}_${{github.event.inputs.RELEASE_VERSION}}_${{ github.run_number }}
 
       - name: Upload asset to GitHub release
