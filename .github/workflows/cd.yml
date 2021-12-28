@@ -7,6 +7,8 @@ name: Test, Build and Deploy
 
 on:
   pull_request:
+    branches:
+      - develop
     types: [closed]
 env:
   RELEASE_NAME: PIMSV2
