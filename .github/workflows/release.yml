@@ -1,4 +1,4 @@
-name: Create Official Release
+name: Create Official Release (Master)
 on:
   workflow_dispatch:
     inputs:
