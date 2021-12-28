@@ -1,4 +1,4 @@
-name: Create Official Release
+name: Release Official build
 on:
   workflow_dispatch:
     inputs:
