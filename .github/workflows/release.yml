@@ -1,4 +1,4 @@
-name: Build and Release [Official Release]
+name: Official Release
 on:
   workflow_dispatch:
     inputs:
