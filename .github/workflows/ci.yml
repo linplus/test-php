@@ -1,4 +1,4 @@
-name: Test and Build PR
+name: Test and Build [Pre-PR]
 
 on:
   pull_request:
