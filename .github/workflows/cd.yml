@@ -10,6 +10,8 @@ on:
     branches:
       - develop
     types: [closed]
+  workflow_dispatch:
+
 env:
   RELEASE_NAME: PIMSV2
   RELEASE_VERSION: 1.0.0
