@@ -25,6 +25,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - run:
+          cat storage/test.js
+
       - name: Archive site content
         uses: thedoctor0/zip-release@master
         with:
