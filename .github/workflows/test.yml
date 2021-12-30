@@ -15,7 +15,7 @@ jobs:
         id: date
         run: |
           echo "::set-output name=date::$(date +'%Y-%m-%d')"
-          echo "branch: ${GITHUB_REF##*/} (commit ${GITHUB_SHA::8}"
+          echo branch: ${GITHUB_REF##*/} (commit ${GITHUB_SHA::8}
 
       - name: Test with environment variables
         env:
