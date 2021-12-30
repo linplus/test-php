@@ -1,9 +1,6 @@
 name: test github action
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 env:
@@ -16,7 +13,9 @@ jobs:
     steps:
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: |
+          echo "::set-output name=date::$(date +'%Y-%m-%d')"
+          echo running on branch ${GITHUB_REF##*/}
 
       - name: Test with environment variables
         env:
