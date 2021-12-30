@@ -15,7 +15,7 @@ jobs:
         id: date
         run: |
           echo "::set-output name=date::$(date +'%Y-%m-%d')"
-          echo build on ${GITHUB_REF##*/}: ${GITHUB_SHA::6}
+          echo runs on ${GITHUB_REF##*/}: ${GITHUB_SHA::8}
 
       - name: Test with environment variables
         env:
