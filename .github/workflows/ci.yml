@@ -1,10 +1,10 @@
 name: Test and Build [Pre-PR]
-
+env:
+  TARGET_BRANCH: develop
 on:
   pull_request:
     branches:
-      - develop
-
+      - ${{env.TARGET_BRANCH}}
 jobs:
   build-test:
     runs-on: ubuntu-latest
