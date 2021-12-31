@@ -45,11 +45,10 @@ jobs:
 
       - name: Echo current branch
         id: echp-branch
-        run: echo "validRelease is ${{steps.check-tag.outputs.validRelease}}"
-        #run: echo "validRelease is: ${{steps.check-tag.outputs.validRelease}}"
+        run: echo "validRelease is ${{steps.check-version.outputs.validRelease}}"
 
       - name: Verify version
-        if: ${{steps.check-tag.outputs.validRelease}} = 'true'
+        if: ${{steps.check-version.outputs.validRelease}} = 'true'
         uses: actions/github-script@v3
         with:
           script: core.setFailed('release version number ${{ github.event.inputs.RELEASE_VERSION }} is invalid !')
