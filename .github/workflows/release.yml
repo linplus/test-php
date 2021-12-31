@@ -37,7 +37,7 @@ jobs:
         run: echo "::set-output branch=${GITHUB_REF##*/}"
 
   release:
-    name: Release ${{github.event.inputs.RELEASE_VERSION}} [Branch ${{ needs.build-test.outputs.branch }}]
+    name: Release ${{github.event.inputs.RELEASE_VERSION}} [Branch ${{ needs.build-test.outputs.branch }}] 242
     runs-on: ubuntu-latest
     needs: build-test
     steps:
