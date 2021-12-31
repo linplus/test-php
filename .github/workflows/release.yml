@@ -34,7 +34,7 @@ jobs:
 
       - name: Get current branch
         id: get-branch
-        run: echo "::set-output branch=${GITHUB_REF##*/}"
+        run: echo "::set-output name=branch::${GITHUB_REF##*/}"
 
   release:
     name: Release ${{github.event.inputs.RELEASE_VERSION}} [Branch ${{ needs.build-test.outputs.branch }}] 242
