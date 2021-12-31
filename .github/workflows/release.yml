@@ -44,7 +44,8 @@ jobs:
           fi
 
       - name: echo result
-        run: echo ${{steps.check-tag.outputs.validRelease}}
+        run:
+          echo "validRelease is: ${{steps.check-tag.outputs.validRelease}}"
 
       - name: Verify version
         if: ${{steps.check-tag.outputs.validRelease}} = 'true'
