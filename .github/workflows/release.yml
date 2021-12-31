@@ -43,9 +43,10 @@ jobs:
             echo ::set-output name=validRelease::false
           fi
 
-      - name: echo result
-        run:
-          echo "validRelease is: ${{steps.check-tag.outputs.validRelease}}"
+      - name: Echo current branch
+        id: echp-branch
+        run: echo "validRelease is ${{steps.check-tag.outputs.validRelease}}"
+        #run: echo "validRelease is: ${{steps.check-tag.outputs.validRelease}}"
 
       - name: Verify version
         if: ${{steps.check-tag.outputs.validRelease}} = 'true'
