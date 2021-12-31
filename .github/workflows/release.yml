@@ -5,6 +5,10 @@ on:
       RELEASE_VERSION:
         description: 'Release Version'
         required: true
+      CURRENT_VERSION:
+        description: 'Branch Name'
+        required: true
+        default: 'master'
 env:
   RELEASE_NAME: PIMSV2
   RELEASE_FILE: pimsv2
@@ -16,6 +20,17 @@ jobs:
     outputs:
       branch: ${{steps.get-branch.outputs.branch}}
     steps:
+      - name: Get current branch
+          id: get-branch
+          run: echo "::set-output name=branch::${GITHUB_REF##*/}"
+
+      - name: Verify Release Inputs
+          if: ${{ steps.get-branch.outputs.branch != github.event.inputs.RELEASE_VERSION}}
+          uses: actions/github-script@v3
+          with:
+            script: |
+              core.setFailed('release branch is not correct !')
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -31,10 +46,6 @@ jobs:
           name: site-build
           path: release.zip
           retention-days: 1
-
-      - name: Get current branch
-        id: get-branch
-        run: echo "::set-output name=branch::${GITHUB_REF##*/}"
 
   release:
     name: Release ${{github.event.inputs.RELEASE_VERSION}} [Branch ${{ needs.build-test.outputs.branch }}] 242
