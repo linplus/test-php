@@ -21,16 +21,15 @@ jobs:
     outputs:
       branch: ${{steps.get-branch.outputs.branch}}
     steps:
+      # Verify Release Inputs
       - name: Get current branch
         id: get-branch
         run: echo "::set-output name=branch::${GITHUB_REF##*/}"
-
       - name: Verify release branch
         if: ${{ steps.get-branch.outputs.branch != github.event.inputs.RELEASE_BRANCH}}
         uses: actions/github-script@v3
         with:
-          script: core.setFailed('release branch is not correct !')
-
+          script: core.setFailed('release branch doesn't match !')
       - name: Check release version input
         id: check-version
         run: |
@@ -41,7 +40,7 @@ jobs:
         if: steps.check-tag.outputs.validRelease != 'true'
         uses: actions/github-script@v3
         with:
-          script: core.setFailed('release version number is not invalid !')
+          script: core.setFailed('release version number is invalid !')
 
       - name: Checkout code
         uses: actions/checkout@v2
