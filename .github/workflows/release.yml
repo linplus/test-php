@@ -11,7 +11,7 @@ env:
   BUILD_TYPE: PRD
 jobs:
   build-test:
-    name: Build and Test [Branch ${GITHUB_REF##*/}]
+    name: Build x Test [Branch ${GITHUB_REF##*/}]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
