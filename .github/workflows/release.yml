@@ -43,7 +43,7 @@ jobs:
             echo ::set-output name=validRelease::false
           fi
 
-      - id: echo result
+      - name: echo result
         run: echo ${{steps.check-tag.outputs.validRelease}}
 
       - name: Verify version
