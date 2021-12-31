@@ -7,10 +7,10 @@ on:
       - develop
 jobs:
   pr-build-test:
-    - name: Try to fail
-      run: exit 1
     runs-on: ubuntu-latest
     steps:
+      - name: Try to fail
+        run: exit 1
       - name: Checkout Code
         uses: actions/checkout@v2
       - run:
