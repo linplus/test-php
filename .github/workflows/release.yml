@@ -17,6 +17,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        fetch-depth: 1
 
       - name: Archive site content
         uses: thedoctor0/zip-release@master
