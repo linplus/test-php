@@ -48,8 +48,8 @@ jobs:
         run: |
           echo "${{env.RELEASE_NAME}} version: ${{github.event.inputs.RELEASE_VERSION}}" > version-info
           echo "build: ${{ steps.date.outputs.date }}.${{ github.run_number }}" >> version-info
-          echo "sha: ${{ github.sha }}" > version-info
-          echo "ref: ${{ github.ref }} > version-info
+          echo "sha: ${{ github.sha }}" >> version-info
+          echo "ref: ${{ github.ref }}" >> version-info
 
       - name: Release
         uses: softprops/action-gh-release@v1
