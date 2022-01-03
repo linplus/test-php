@@ -18,21 +18,19 @@ jobs:
     name: Build x Test [Branch ${GITHUB_REF##*/}]
     runs-on: ubuntu-latest
     steps:
-      - name: check tag by input
-        if: ${{github.event.inputs.RELEASE_VERSION != 0}}
-        id: set-tag
-        run: echo ::set-output name=tag::${{github.event.inputs.RELEASE_VERSION}}
-
       - name: check tag by push
-        if: startsWith(github.ref, 'refs/tags/')
-        id: set-tag
-        run: echo ::set-output name=tag::${GITHUB_REF##*/}
+        if: ${{startsWith(github.ref, 'refs/tags/')}}
+        run: echo "TAG_NAME=${GITHUB_REF##*/}" >> GITHUB_ENV
+
+      - name: check tag by input
+        if: ${{!startsWith(github.ref, 'refs/tags/')}}
+        run: echo "TAG_NAME=${{github.event.inputs.RELEASE_VERSION}}" >> GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          ref: ${{ steps.set-tag.outputs.tag }}
+          ref: ${{ env.TAG_NAME }}
 
       # Fix timestamps
       - name: Restore timestamps for source code
