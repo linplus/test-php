@@ -88,9 +88,9 @@ jobs:
             release.zip
             version-info
 
-github:
-  event:
-    inputs:#      - name: Create GitHub release
+#github:
+#  event:
+#    inputs:#      - name: Create GitHub release
 #        id: create-new-release
 #        uses: actions/create-release@v1
 #        env:
