@@ -54,6 +54,9 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          draft: true
+          prerelease: true
+          name: ${{github.event.inputs.RELEASE_VERSION}}
           files: |
             release.zip
             version-info
