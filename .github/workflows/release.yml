@@ -18,8 +18,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: '0.0.9'
           fetch-depth: 0
+          ref: 20211222.15
 
       # Fix timestamps
       - name: restore timestamps
