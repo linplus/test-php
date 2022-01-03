@@ -84,7 +84,7 @@ jobs:
           #draft: true
           #prerelease: true
           name: ${{github.event.inputs.RELEASE_VERSION}}
-          tag_name: 0.0.9
+          tag_name: ${{env.TAG_NAME}}
           files: |
             release.zip
             version-info
