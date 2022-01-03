@@ -27,6 +27,9 @@ jobs:
       - name: List files
         run: ls -la .
 
+      - name: echo .js files
+        run: cat storage/test.js
+
       - name: Archive site content
         uses: thedoctor0/zip-release@master
         with:
