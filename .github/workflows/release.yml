@@ -7,7 +7,6 @@ on:
     inputs:
       RELEASE_VERSION:
         description: 'Release Version'
-        #default: 0
         required: true
 env:
   RELEASE_NAME: PIMSV2
@@ -33,7 +32,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          ref: ${{ env.TAG_NAME }}
+          ref: ${{github.event.inputs.RELEASE_VERSION}}
 
       # Fix timestamps
       - name: Restore timestamps for source code
@@ -89,7 +88,7 @@ jobs:
           #draft: true
           #prerelease: true
           name: ${{github.event.inputs.RELEASE_VERSION}}
-          tag_name: ${{env.TAG_NAME}}
+          tag_name: ${{github.event.inputs.RELEASE_VERSION}}
           files: |
             release.zip
             version-info
