@@ -78,6 +78,11 @@ jobs:
           echo "sha: ${{ github.sha }}" >> version-info
           echo "ref: ${{ github.ref }}" >> version-info
 
+      - name: echo tag
+        run: echo "TAG_NAME=${{env.TAG_NAME}}"
+      - name: echo Input
+        run: echo "input=${{github.event.inputs.RELEASE_VERSION}}"
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
