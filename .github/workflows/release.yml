@@ -20,6 +20,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: List files
+        run: ls -la .
+
       - name: Archive site content
         uses: thedoctor0/zip-release@master
         with:
