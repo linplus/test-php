@@ -4,6 +4,7 @@ on:
     inputs:
       RELEASE_VERSION:
         description: 'Release Version'
+        default: 1.0.0
         required: true
 env:
   RELEASE_NAME: PIMSV2
