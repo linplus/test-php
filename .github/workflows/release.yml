@@ -18,7 +18,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          fetch-depth: 0
+
+      # Fix timestamps
+      - name: restore timestamps
+        uses: chetan/git-restore-mtime-action@v1
 
       - name: List files
         run: ls -la .
