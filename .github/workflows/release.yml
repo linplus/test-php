@@ -8,6 +8,10 @@ on:
       RELEASE_VERSION:
         description: 'Release Version'
         required: true
+      PRE_RELEASE:
+        description: 'Pre-Release'
+        default: true
+
 env:
   RELEASE_NAME: PIMSV2
   RELEASE_FILE: pimsv2
@@ -86,7 +90,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           draft: false
-          prerelease: true
+          prerelease: ${{github.event.inputs.PRE_RELEASE}}
           name: ${{github.event.inputs.RELEASE_VERSION}}
           tag_name: ${{github.event.inputs.RELEASE_VERSION}}
           files: |

@@ -20,7 +20,7 @@ env:
 
 jobs:
   build-test:
-    if: github.event.action == 'closed' && github.event.pull_request.merged == true
+    # if: github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -55,11 +55,21 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(date +'%Y%m%d')"
 
-#      - name: add add version to release
-#        run: |
-#          echo "${{env.RELEASE_NAME}} version: ${{env.RELEASE_VERSION}}" > version-info
-#          echo "build: ${{steps.date.outputs.date}}.${{github.run_number}}" >> version-info
-#          zip ./release.zip version-info
+      - name: add add version to release
+        run: |
+          echo "${{env.RELEASE_NAME}} version: ${{env.RELEASE_VERSION}}" > version-info
+          echo "build: ${{steps.date.outputs.date}}.${{github.run_number}}" >> version-info
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          name: ${{github.event.inputs.RELEASE_VERSION}}
+          tag_name: ${{github.event.inputs.RELEASE_VERSION}}
+          files: |
+            release.zip
+            version-info
+
 #
 #      - name: Create GitHub release
 #        id: create-new-release
