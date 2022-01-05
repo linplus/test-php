@@ -1,17 +1,17 @@
-name: Build and Test [PR]
-env:
-  TARGET_BRANCH: develop
+name: Test and Build [Pre-PR]
+
 on:
   pull_request:
     branches:
       - develop
+
 jobs:
-  pr-build-test:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Try to fail
-        run: exit 1
       - name: Checkout Code
         uses: actions/checkout@v2
       - run:
           cat storage/test.js
+#      - name: Attempt to fail
+#        run: exit 1
