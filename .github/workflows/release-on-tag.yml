@@ -59,28 +59,29 @@ jobs:
         id: datetime
         run: echo "::set-output name=datetime::$(date +'%Y-%m-%d %H:%M:%S')"
 
-      - name: Get current branch
-        id: get-branch
+      - name: Get current tag
+        id: get-tag
         run: echo "::set-output name=branch::${GITHUB_REF##*/}"
 
       - name: echo release tag
         run: |
-          echo ${{steps.get-branch.outputs.branch}}
+          echo ${{steps.get-tag.outputs.branch}}
 
       - name: Check release version input
         id: prerelease
         run: |
-          if ! [[ ${{steps.get-branch.outputs.branch}} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if ! [[ ${{steps.get-tag.outputs.branch}} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo ::set-output name=prerelease::true
           fi
 
       - name: add add version to release
         env:
           VERSION_INFO: version-info.ini
+          VERSION_NUM: ${{steps.get-tag.outputs.branch}}
         run: |
           echo "[Build]" > ${{env.VERSION_INFO}}
-          echo "release_version = ${{steps.tag.output.tag}}" >> ${{env.VERSION_INFO}}
-          if ! [[ ${{steps.tag.output.tag}} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "release_version = ${{env.VERSION_NUM}}" >> ${{env.VERSION_INFO}}
+          if ! [[ ${{env.VERSION_NUM}} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "release_type = pre-release" >> ${{env.VERSION_INFO}}
           fi
           echo "build_version = ${{github.event.inputs.RELEASE_VERSION}}+${GITHUB_SHA::8}" >> ${{env.VERSION_INFO}}
