@@ -1,16 +1,8 @@
-name: Build and Release [Triggered by Tag]
+name: Build and Release [Tag]
 on:
   push:
     tags:
       - "*.*.*"
-  workflow_dispatch:
-    inputs:
-      RELEASE_VERSION:
-        description: 'Release Version'
-        required: true
-      PRE_RELEASE:
-        description: 'Pre-Release'
-        default: true
 
 env:
   RELEASE_NAME: PIMSV2
@@ -21,22 +13,11 @@ jobs:
     name: Build x Test [Branch ${GITHUB_REF##*/}]
     runs-on: ubuntu-latest
     steps:
-      - name: check tag by push
-        if: ${{startsWith(github.ref, 'refs/tags/')}}
-        run: echo "TAG_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
-      - name: check tag by input
-        if: ${{!startsWith(github.ref, 'refs/tags/')}}
-        run: echo "TAG_NAME=${{github.event.inputs.RELEASE_VERSION}}" >> $GITHUB_ENV
-
-      - name: echo tag
-        run: echo "TAG_NAME=${{env.TAG_NAME}}"
 
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          ref: ${{github.event.inputs.RELEASE_VERSION}}
 
       # Fix timestamps
       - name: Restore timestamps for source code
@@ -74,32 +55,38 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(date +'%Y%m%d')"
 
-      - name: add add version to release
-        run: |
-          echo "${{env.RELEASE_NAME}} version: ${{github.event.inputs.RELEASE_VERSION}}" > version-info
-          echo "build: ${{ steps.date.outputs.date }}.${{ github.run_number }}" >> version-info
-          echo "sha: ${{ github.sha }}" >> version-info
-          echo "ref: ${{ github.ref }}" >> version-info
+      - name: Get current datetime
+        id: datetime
+        run: echo "::set-output name=datetime::$(date +'%Y-%m-%d %H:%M:%S')"
 
-      - name: echo tag
-        run: echo "TAG_NAME=${{env.TAG_NAME}}"
-      - name: echo Input
-        run: echo "input=${{github.event.inputs.RELEASE_VERSION}}"
+      - name: Get release tag
+        id: tag
+        run: echo "::set-output name=tag::${GITHUB_REF##*/}"
 
       - name: Check release version input
-        id: check-version
+        id: prerelease
         run: |
-          if ! [[ ${{ github.event.inputs.RELEASE_VERSION }} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if ! [[ ${{steps.tag.output.tag}} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo ::set-output name=prerelease::true
           fi
+
+      - name: add add version to release
+        run: |
+          echo "[Build]" >> ${{env.VERSION_INFO}}
+          echo "release_version = ${{steps.tag.output.tag}}" >> ${{env.VERSION_INFO}}
+          if ! [[ ${{steps.tag.output.tag}} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "release_type = pre-release" >> ${{env.VERSION_INFO}}
+          fi
+          echo "build_version = ${{github.event.inputs.RELEASE_VERSION}}+${GITHUB_SHA::8}" >> ${{env.VERSION_INFO}}
+          echo "build_date = ${{steps.datetime.outputs.datetime}}" >> ${{env.VERSION_INFO}}
+          echo "build_id = ${GITHUB_SHA})" >> ${{env.VERSION_INFO}}
+          zip ./release.zip ${{env.VERSION_INFO}}
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          draft: false
-          prerelease: ${{github.event.inputs.PRE_RELEASE}}
-          name: ${{github.event.inputs.RELEASE_VERSION}}
-          tag_name: ${{github.event.inputs.RELEASE_VERSION}}
+          name: ${{steps.tag.output.tag}}
+          prerelease: ${{steps.prerelease.outputs.prerelease}}
           files: |
             release.zip
             version-info
