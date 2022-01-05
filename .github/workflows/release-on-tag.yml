@@ -66,6 +66,12 @@ jobs:
           echo "name=${GITHUB_REF##*/}"
           echo "::set-output name=tag::${GITHUB_REF##*/}"
 
+      - name: Get release tag
+        id: tag
+        run: |
+          echo ${{steps.tag.output.tag}}
+          echo "tag=${{steps.tag.output.tag}} "
+
       - name: Check release version input
         id: prerelease
         run: |
