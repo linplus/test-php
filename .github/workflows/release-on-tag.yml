@@ -84,7 +84,7 @@ jobs:
           if ! [[ ${{env.VERSION_NUM}} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "release_type = pre-release" >> ${{env.VERSION_INFO}}
           fi
-          echo "build_version = ${{github.event.inputs.RELEASE_VERSION}}+${GITHUB_SHA::8}" >> ${{env.VERSION_INFO}}
+          echo "build_version = ${{env.VERSION_NUM}}+${GITHUB_SHA::8}" >> ${{env.VERSION_INFO}}
           echo "build_date = ${{steps.datetime.outputs.datetime}}" >> ${{env.VERSION_INFO}}
           echo "build_id = ${GITHUB_SHA})" >> ${{env.VERSION_INFO}}
           zip ./release.zip ${{env.VERSION_INFO}}
