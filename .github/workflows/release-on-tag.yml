@@ -64,7 +64,7 @@ jobs:
         run: |
           echo ${GITHUB_REF##*/}
           echo "name=${GITHUB_REF##*/}"
-          echo "##[set-output name=tag;]$(echo ${GITHUB_REF##*/})"
+          echo "::set-output name=tag::$(echo ${GITHUB_REF##*/})"
 
       - name: echo release tag
         run: |
