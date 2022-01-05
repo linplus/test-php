@@ -91,7 +91,7 @@ jobs:
           prerelease: ${{steps.prerelease.outputs.prerelease}}
           files: |
             release.zip
-            version-info
+            version-info.ini
 
 #github:
 #  event:

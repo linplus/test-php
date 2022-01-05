@@ -1,4 +1,4 @@
-name: Test and Build [Pre-PR]
+name: Test and Build [PR]
 env:
   TARGET_BRANCH: develop
 on:

@@ -84,7 +84,7 @@ jobs:
           tag_name: ${{github.event.inputs.RELEASE_VERSION}}
           files: |
             release.zip
-            version-info
+            version-info.ini
 
 #github:
 #  event:
