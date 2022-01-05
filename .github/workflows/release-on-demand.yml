@@ -64,14 +64,14 @@ jobs:
 
       - name: add add version to release
         run: |
-          echo "[Build]" >> ${{env.VERSION_INFO}}
-          echo "release_version = ${{github.event.inputs.RELEASE_VERSION}}" >> ${{env.VERSION_INFO}}
+          echo "[Build]" > ${{env.VERSION_INFO}}
+          echo "release_version = ${{github.event.inputs.RELEASE_VERSION}}" > ${{env.VERSION_INFO}}
           if ! [[ ${{ github.event.inputs.RELEASE_VERSION }} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "release_type = pre-release" >> ${{env.VERSION_INFO}}
+            echo "release_type = pre-release" > ${{env.VERSION_INFO}}
           fi
-          echo "build_version = ${{github.event.inputs.RELEASE_VERSION}}+${GITHUB_SHA::8}" >> ${{env.VERSION_INFO}}
-          echo "build_date = ${{steps.datetime.outputs.datetime}}" >> ${{env.VERSION_INFO}}
-          echo "build_id = ${GITHUB_SHA})" >> ${{env.VERSION_INFO}}
+          echo "build_version = ${{github.event.inputs.RELEASE_VERSION}}+${GITHUB_SHA::8}" > ${{env.VERSION_INFO}}
+          echo "build_date = ${{steps.datetime.outputs.datetime}}" > ${{env.VERSION_INFO}}
+          echo "build_id = ${GITHUB_SHA})" > ${{env.VERSION_INFO}}
           zip ./release.zip ${{env.VERSION_INFO}}
 
       - name: Release
