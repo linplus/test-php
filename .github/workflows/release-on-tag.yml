@@ -61,15 +61,18 @@ jobs:
 
       - name: Get release tag
         id: tag
-        run: |
-          echo ${GITHUB_REF##*/}
-          echo "name=${GITHUB_REF##*/}"
-          echo "::set-output name=tag::$(echo ${GITHUB_REF##*/})"
+        run: echo "::set-output name=tag::$(echo ${GITHUB_REF##*/})"
+
+      - name: Get release tag
+        id: tag2
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})"
+
 
       - name: echo release tag
         run: |
           echo ${{steps.tag.output.tag}}
           echo "tag=${{steps.tag.output.tag}} "
+          echo "tag=${{steps.tag2.output.BRANCH_NAME}} "
 
       - name: Check release version input
         id: prerelease
