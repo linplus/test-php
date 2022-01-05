@@ -61,7 +61,10 @@ jobs:
 
       - name: Get release tag
         id: tag
-        run: echo "::set-output name=tag::${GITHUB_REF##*/}"
+        run: |
+          echo ${GITHUB_REF##*/}
+          echo "name=${GITHUB_REF##*/}"
+          echo "::set-output name=tag::${GITHUB_REF##*/}"
 
       - name: Check release version input
         id: prerelease
