@@ -1,4 +1,4 @@
-name: Test Release Workflow
+name: Test Release Workflow [HERE]!
 on:
   workflow_dispatch:
     inputs:
