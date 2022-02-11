@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-   <?php print_r($_GET); ?/>
+   <?php print_r($_GET); ?>
 </body>
 </html>
