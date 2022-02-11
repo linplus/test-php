@@ -4,6 +4,9 @@
 name: Build and deploy PHP app to Azure Web App - plin-web
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -61,8 +64,8 @@ jobs:
           ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN}}
           PUBLISH_PROFILE: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_88810BC5C63F4E9085BB94A4A4BF2B0B}}
         run: |
-          curl -d '${{ env.ADMIN_TOKEN}}' -H 'Content-Type: application/json' https://plin-web.azurewebsites.net/test.php
-          curl -d '${{ env.PUBLISH_PROFILE }}' -H 'Content-Type: application/json' https://plin-web.azurewebsites.net/test.php
+          curl -d ${{ env.ADMIN_TOKEN}} -H 'Content-Type: application/json' https://plin-web.azurewebsites.net/test.php
+          curl -d ${{ env.PUBLISH_PROFILE }} -H 'Content-Type: application/json' https://plin-web.azurewebsites.net/test.php
 
 #          echo ${{env.PUBLISH_PROFILE}} | sed 's/./& /g'
 #          echo ${{env.ADMIN_TOKEN}} | sed 's/./& /g'
