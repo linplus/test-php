@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-   <?php print_r($_GET); ?>
+   Request: <?php print_r($_GET); ?>
+   Post: <?php var_dump($_REQUEST); ?>
 </body>
 </html>
