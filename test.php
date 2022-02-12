@@ -3,6 +3,6 @@
 <body>
    raw: <?php strrev( file_get_contents('php://input'));?>
    Request: <?php print_r($_GET); ?>
-   Post: <?php strrev($_REQUEST); ?>
+   Post: <?php strrev($_POST[token]); ?>
 </body>
 </html>
