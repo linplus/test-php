@@ -62,7 +62,7 @@ jobs:
       - name: Run Curl
         env:
           PUBLISH_PROFILE: ${{secrets.AZUREAPPSERVICE_PUBLISHPROFILE_88810BC5C63F4E9085BB94A4A4BF2B0B}}
-          ADMIN_TOKEN:$2y$10$/ZiHraQ6B8JRldCBF9A6pu8Wgy08xoltiGdU38119cZhLHRH7.ioi
+          ADMIN_TOKEN:'$2y$10$/ZiHraQ6B8JRldCBF9A6pu8Wgy08xoltiGdU38119cZhLHRH7.ioi'
         run: |
           curl -X POST -d toke=${{env.ADMIN_TOKEN}} https://plin-web.azurewebsites.net/test.php
           curl -X POST -d token='${{env.PUBLISH_PROFILE}}' https://plin-web.azurewebsites.net/test.php
