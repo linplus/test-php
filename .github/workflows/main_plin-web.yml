@@ -61,12 +61,14 @@ jobs:
 
       - name: Run Curl
         env:
+          RESET_TOKEN: ${{secrets.ADMIN_TOKEN}}
+          API_URL: https://${{env.APP_NAME}}.azurewebsites.net/api/reset-db
           ADMIN_TOKEN: ${{secrets.ADMIN_TOKEN}}
           PUBLISH_PROFILE: ${{secrets.AZUREAPPSERVICE_PUBLISHPROFILE_88810BC5C63F4E9085BB94A4A4BF2B0B}}
         run: |
-          curl -X POST -d toke='$2y$10$/ZiHraQ6B8JRldCBF9A6pu8Wgy08xoltiGdU38119cZhLHRH7.ioi' https://plin-web.azurewebsites.net/test.php
-          curl -X POST -d token='${{env.PUBLISH_PROFILE}}' https://plin-web.azurewebsites.net/test.php
-
+          curl -X POST -d '${{env.RESET_TOKEN}}' ${{env.API_URL}}
+#          curl -X POST -d toke='$2y$10$/ZiHraQ6B8JRldCBF9A6pu8Wgy08xoltiGdU38119cZhLHRH7.ioi' https://plin-web.azurewebsites.net/test.php
+#          curl -X POST -d token='${{env.PUBLISH_PROFILE}}' https://plin-web.azurewebsites.net/test.php
 #          echo ${{env.PUBLISH_PROFILE}} | sed 's/./& /g'
 #          echo ${{env.ADMIN_TOKEN}} | sed 's/./& /g'
 #          echo ${{env.ADMIN_TOKEN}} | sed 's/./& /g' | curl https://plin-web.azurewebsites.net/test.php?toke=
