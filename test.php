@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <body>
-   raw: <?php strrev( file_get_contents('php://input'));?>
-   Request: <?php print_r($_GET); ?>
-   Post: <?php strrev($_POST[token]); ?>
+   raw: <?php echo strrev( file_get_contents('php://input'));?>
+   Request: <?php echo print_r($_GET); ?>
+   Post: <?php echo strrev($_POST[token]); ?>
 </body>
 </html>
