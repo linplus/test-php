@@ -18,7 +18,7 @@ env:
 jobs:
 
   create-tag:
-    if: ${{github.event.inputs.RELEASE_VERSION}}
+    if: ${{github.event.inputs.CREATE_TAG}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
