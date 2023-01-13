@@ -2,6 +2,10 @@ name: Build and Release [Manual]
 on:
   workflow_dispatch:
     inputs:
+      CREATE_TAG:
+        type: boolean
+        default: false
+        description: Create Tag Flag
       RELEASE_VERSION:
         description: 'Release Version (Tag Name)'
         required: true
@@ -10,7 +14,18 @@ env:
   RELEASE_NAME: PIMSV2
   RELEASE_FILE: pimsv2
   BUILD_TYPE: PRD
+
 jobs:
+
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: rickstaa/action-create-tag@v1
+        with:
+          tag: ${{github.event.inputs.RELEASE_VERSION}}
+          message: "Tag for PIMS Release ${{github.event.inputs.RELEASE_VERSION}}"
+
   build-test:
     name: Build x Test [Branch ${GITHUB_REF##*/}]
     runs-on: ubuntu-latest
