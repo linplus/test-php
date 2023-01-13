@@ -25,7 +25,8 @@ jobs:
           echo "::set-output name=date::$(date +'%Y-%m-%d')"
           echo branch: "${GITHUB_REF##*/} (commit ${GITHUB_SHA::8})"
           echo "Tag for PIMS Release ${{github.event.inputs.RELEASE_VERSION}}"
-          echo "Flag ${{github.event.inputs.CREATE_TAG}}"
+          echo "False Flag ${{github.event.inputs.CREATE_TAG == 'false'}}"
+          echo "True Flag ${{github.event.inputs.CREATE_TAG == 'true'}}"
 
       - name: Test with environment variables
         env:
