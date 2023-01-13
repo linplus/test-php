@@ -2,6 +2,14 @@ name: test github action
 
 on:
   workflow_dispatch:
+    inputs:
+      CREATE_TAG:
+        type: boolean
+        default: false
+        description: Create New Tag
+      RELEASE_VERSION:
+        description: 'Release Version (Tag Name)'
+        required: true
 
 env:
   PIMS_VERSION: 2.0.0
@@ -16,6 +24,8 @@ jobs:
         run: |
           echo "::set-output name=date::$(date +'%Y-%m-%d')"
           echo branch: "${GITHUB_REF##*/} (commit ${GITHUB_SHA::8})"
+          echo "Tag for PIMS Release ${{github.event.inputs.RELEASE_VERSION}}"
+          echo "Flag ${{github.event.inputs.CREATE_TAG}}"
 
       - name: Test with environment variables
         env:
