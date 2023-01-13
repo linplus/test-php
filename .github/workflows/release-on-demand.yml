@@ -16,13 +16,18 @@ env:
   BUILD_TYPE: PRD
 
 jobs:
-
   create-tag:
-    if: github.event.inputs.CREATE_TAG == true
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: rickstaa/action-create-tag@v1
+      - run: |
+          echo "Create PIMS Release ${{github.event.inputs.RELEASE_VERSION}}"
+          echo "Create Tag ? ${{github.event.inputs.CREATE_TAG == 'true'}}"
+      - name: Checkout code
+        if: ${{ github.event.inputs.CREATE_TAG == 'true' }}
+        uses: actions/checkout@v3
+      - name: Checkout code
+        if: ${{ github.event.inputs.CREATE_TAG == 'true' }}
+        uses: rickstaa/action-create-tag@v1
         with:
           tag: ${{github.event.inputs.RELEASE_VERSION}}
           message: "Tag for PIMS Release ${{github.event.inputs.RELEASE_VERSION}}"
