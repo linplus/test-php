@@ -111,7 +111,7 @@ jobs:
           tag_name: ${{github.event.inputs.RELEASE_VERSION}}
           generate_release_notes: false
           body: 'my manual release body!'
-          body_path: release-note.txt
+          body_path: release.md
           files: |
             release.zip
             version-info.ini
