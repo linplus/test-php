@@ -106,7 +106,7 @@ jobs:
           name: ${{github.event.inputs.RELEASE_VERSION}}
           prerelease: ${{steps.prerelease.outputs.prerelease}}
           tag_name: ${{github.event.inputs.RELEASE_VERSION}}
-          generate_release_notes: true
+          generate_release_notes: false
           body: 'my manual release body!'
           body_path: version-info.ini
           files: |
