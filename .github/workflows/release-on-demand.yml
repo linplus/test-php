@@ -59,7 +59,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: site-build
-          path: release.zip
+          path: |
+            release.zip
+            release-note.txt
+            release.md
           retention-days: 1
 
   release:
@@ -108,7 +111,7 @@ jobs:
           tag_name: ${{github.event.inputs.RELEASE_VERSION}}
           generate_release_notes: false
           body: 'my manual release body!'
-          body_path: version-info.ini
+          body_path: release-note.txt
           files: |
             release.zip
             version-info.ini
